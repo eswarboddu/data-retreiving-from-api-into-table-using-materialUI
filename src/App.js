@@ -27,7 +27,8 @@ export default App;
 
 
 const Container = styled.div`
-
+  justify-content: center;
+  width: 100%
 `
 
 const Main = styled.div`

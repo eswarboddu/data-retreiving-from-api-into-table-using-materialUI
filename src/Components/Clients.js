@@ -16,6 +16,7 @@ import TableFooter from '@material-ui/core/TableFooter';
 
 const Clients = () => {
   const [data, setData] = useState([]);
+  // const [search, setSearch] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -64,6 +65,7 @@ const Clients = () => {
       .then((res) => res.json())
       .then((res) => {
         setData(res);
+        // setSearch("Mart");
         console.log(res);
       })
       .catch((e) => {
@@ -114,12 +116,15 @@ const Clients = () => {
                 </TableRow>
               )}
             </TableBody>
+            </Table>
 
-            <TableFooter>
-              <TableRow>
-                <TablePagination
+            {/* <TableFooter > */}
+            <Page>
+            {/* <TableRow> */}
+                <TablePagination style={{margin: "auto"}}
+                  component="div"
                   rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                  colSpan={3}
+                  // colSpan={6}
                   count={data.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
@@ -131,9 +136,10 @@ const Clients = () => {
                   onChangeRowsPerPage={handleChangeRowsPerPage}
                   
                 />
-              </TableRow>
-            </TableFooter>
-          </Table>
+              {/* </TableRow> */}
+              </Page>
+            {/* </TableFooter> */}
+          
         </TableContainer>
       </Paper>
     </Container>
@@ -157,4 +163,15 @@ const Container = styled.div`
   padding-left: 16px;
   padding-right: 16px;
   margin-top: 30px;
+
 `;
+
+const Page = styled.div`
+  display:flex;
+  justify-content: center;
+  width:100%
+`
+
+
+
+{/* .filter((client) => client.clientName.indexOf(search) !== -1) */}
