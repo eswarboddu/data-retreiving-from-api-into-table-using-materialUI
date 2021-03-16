@@ -9,7 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import NewClient from "./NewClient";
 import {Link} from "react-router-dom";
 
-function Header() {
+const Header = () => {
   
   return (
     <Container>
@@ -19,7 +19,7 @@ function Header() {
             <Name>Clients</Name>
           </Grid>
           <Grid item xs={6}>
-            <Add onClick={NewClient}>
+            <Add>
             <Link to="/newclient">
               <Button
                 variant="contained"
