@@ -2,17 +2,21 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./Components/Header";
 import Clients from "./Components/Clients";
 import styled from "styled-components";
+import NewClient from "./Components/NewClient";
 
 function App() {
   return (
     <div className="App">
     <Router>
     <Container>
-        <Header />
         <Main>
           <Switch>
-            <Route path="/">
+            <Route exact path="/">
+              <Header />
               <Clients />
+            </Route>
+            <Route path="/newclient">
+              <NewClient />
             </Route>
           </Switch>
         </Main>

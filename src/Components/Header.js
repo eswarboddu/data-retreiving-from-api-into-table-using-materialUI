@@ -6,31 +6,34 @@ import { TextField, Button } from "@material-ui/core";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import AddIcon from "@material-ui/icons/Add";
 import Grid from "@material-ui/core/Grid";
+import NewClient from "./NewClient";
+import {Link} from "react-router-dom";
 
 function Header() {
+  
   return (
     <Container>
-      {/* <Grid container justify="space-between" alignItems="center" spacing={3}> */}
       <ClientContainer>
         <Grid container justify="space-between" alignItems="center">
-          {/* <Grid container item xs={12} sm={6} direction="row"> */}
           <Grid item xs={6}>
             <Name>Clients</Name>
           </Grid>
           <Grid item xs={6}>
-            <Add>
+            <Add onClick={NewClient}>
+            <Link to="/newclient">
               <Button
                 variant="contained"
                 color="primary"
                 startIcon={<AddIcon />}
+                // onClick={NewClient}
               >
                 NEW CLIENT
               </Button>
+              </Link>
             </Add>
           </Grid>
         </Grid>
       </ClientContainer>
-      {/* </Grid> */}
 
       <SearchContainer>
         <Grid
