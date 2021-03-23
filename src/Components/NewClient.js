@@ -47,31 +47,26 @@ const NewClient = () => {
     fetch(
       "http://javareesbyapi-env.eba-rtdeyeqd.ap-southeast-2.elasticbeanstalk.com/api/v1/addclient/",
       {
-        method: "post",
-        mode: "no-cors",
-        headers: {
-          "Accept": "/",
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          clientName: formData.clientName,
-          clientEmail: formData.clientEmail,
-          clientWorkPhone: formData.clientWorkPhone,
-          clientAddress: formData.clientAddress,
-          clientPersonalPhone: formData.clientPersonalPhone,
-          clientPocName: formData.clientPocName,
-          clientFax: formData.clientFax,
-          clientIndustry: formData.clientIndustry,
-          clientContract: formData.clientContract,
-          facebook: formData.facebook,
-          instagram: formData.instagram,
-          clientWebsite: formData.clientWebsite,
-          twitter: formData.twitter,
-        }),
-      }
-
-    ).catch(() => alert("There was an error, please try again"));
-  };
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+      tenantId: 'reesby',
+      clientName: formData.clientName,
+      clientEmail: formData.clientEmail,
+      clientWorkPhone: formData.clientWorkPhone,
+      clientAddress: formData.clientAddress,
+      clientPersonalPhone: formData.clientPersonalPhone,
+      clientPocName: formData.clientPocName,
+      clientFax: formData.clientFax,
+      clientIndustry: formData.clientIndustry,
+      clientContract: formData.clientContract,
+      facebook: formData.facebook,
+      instagram: formData.instagram,
+      clientWebsite: formData.clientWebsite,
+      twitter: formData.twitter,
+      }),
+      }).catch(() => alert("There was an error, please try again"));
+    }
 
   return (
     <div className={classes.root}>
