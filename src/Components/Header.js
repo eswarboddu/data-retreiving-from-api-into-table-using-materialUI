@@ -6,7 +6,6 @@ import { TextField, Button } from "@material-ui/core";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import AddIcon from "@material-ui/icons/Add";
 import Grid from "@material-ui/core/Grid";
-import NewClient from "./NewClient";
 import {Link} from "react-router-dom";
 
 const Header = () => {

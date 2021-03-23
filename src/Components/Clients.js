@@ -1,18 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from "@material-ui/core";
+import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import { TablePagination } from "@material-ui/core";
-import TableFooter from '@material-ui/core/TableFooter';
-// import MaterialTable from "material-table";
 
 const Clients = () => {
   const [data, setData] = useState([]);
@@ -22,7 +12,6 @@ const Clients = () => {
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
-
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
     };
@@ -31,32 +20,6 @@ const Clients = () => {
       setRowsPerPage(parseInt(event.target.value, 10));
       setPage(0);
     };
-  // const columns = [
-  //   {
-  //     title: "Client Name",
-  //     field: "clientName",
-  //   },
-  //   {
-  //     title: "Email",
-  //     field: "clientEmail",
-  //   },
-  //   {
-  //     title: "Phone",
-  //     field: "clientWorkPhone",
-  //   },
-  //   {
-  //     title: "Industry",
-  //     field: "clientIndustry",
-  //   },
-  //   {
-  //     title: "Point of Contact",
-  //     field: "clientPocName",
-  //   },
-  //   {
-  //     title: "Website",
-  //     field: "clientWebsite",
-  //   },
-  // ];
 
   useEffect(() => {
     fetch(
@@ -117,10 +80,7 @@ const Clients = () => {
               )}
             </TableBody>
             </Table>
-
-            {/* <TableFooter > */}
             <Page>
-            {/* <TableRow> */}
                 <TablePagination style={{margin: "auto"}}
                   component="div"
                   rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
@@ -136,26 +96,13 @@ const Clients = () => {
                   onChangeRowsPerPage={handleChangeRowsPerPage}
                   
                 />
-              {/* </TableRow> */}
               </Page>
-            {/* </TableFooter> */}
-          
         </TableContainer>
       </Paper>
     </Container>
   )
 }
 
-//     <Container>
-//     <MaterialTable
-//         title="All Clients"
-//         data={data}
-//         columns={columns}
-//         searchable="off"
-//         />
-//     </Container>
-//   );
-// };
 
 export default Clients;
 
