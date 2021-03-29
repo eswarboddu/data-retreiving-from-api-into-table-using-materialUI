@@ -8,6 +8,7 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import Button from "@material-ui/core/Button";
 import useStyles from "./styles";
 import Box from "@material-ui/core/Box";
+import { toast } from "react-toastify";
 
 const NewClient = () => {
   const classes = useStyles();
@@ -31,42 +32,69 @@ const NewClient = () => {
     twitter: "",
     linkedin: "",
     addDate: null,
-    updateDate: null
+    updateDate: null,
   });
 
+  const [formError, setFormError] = useState({});
+
   const handleChange = (event) => {
-    console.log({[event.target.name]: event.target.value});
-    console.log(setFormData({[event.target.name]: event.target.value}));
     setFormData({ ...formData, [event.target.name]: event.target.value });
-    
   };
 
-  const postData = (event) => {
+  const Validate = () => {
+    const error = {};
+    const nameReg = formData.clientName.length > 3;
+    const emailReg = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/gm.test(formData.clientEmail);
+    const phoneReg = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(formData.clientWorkPhone);
+
+    if (!nameReg) {
+      error.clientName = "Client Name should contain more than three charecters";
+    }
+
+    if (!emailReg) {
+      error.clientEmail = "Please enter a valid email address";
+    }
+
+    if (!phoneReg) {
+      error.clientWorkPhone = "Please enter a valid phone number";
+    }
+    setFormError(error);
+
+    return Object.keys(error).length === 0;
+  };
+
+  function postData(event) {
     event.preventDefault();
-    
+
+    if (!Validate()) {
+      toast.error("Please fix fields in red");
+      return;
+    }
+
     fetch(
       "http://javareesbyapi-env.eba-rtdeyeqd.ap-southeast-2.elasticbeanstalk.com/api/v1/addclient/",
       {
-      method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-      tenantId: 'reesby',
-      clientName: formData.clientName,
-      clientEmail: formData.clientEmail,
-      clientWorkPhone: formData.clientWorkPhone,
-      clientAddress: formData.clientAddress,
-      clientPersonalPhone: formData.clientPersonalPhone,
-      clientPocName: formData.clientPocName,
-      clientFax: formData.clientFax,
-      clientIndustry: formData.clientIndustry,
-      clientContract: formData.clientContract,
-      facebook: formData.facebook,
-      instagram: formData.instagram,
-      clientWebsite: formData.clientWebsite,
-      twitter: formData.twitter,
-      }),
-      }).catch(() => alert("There was an error, please try again"));
-    }
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          tenantId: "reesby",
+          clientName: formData.clientName,
+          clientEmail: formData.clientEmail,
+          clientWorkPhone: formData.clientWorkPhone,
+          clientAddress: formData.clientAddress,
+          clientPersonalPhone: formData.clientPersonalPhone,
+          clientPocName: formData.clientPocName,
+          clientFax: formData.clientFax,
+          clientIndustry: formData.clientIndustry,
+          clientContract: formData.clientContract,
+          facebook: formData.facebook,
+          instagram: formData.instagram,
+          clientWebsite: formData.clientWebsite,
+          twitter: formData.twitter,
+        }),
+      }
+    ).catch(() => alert("There was an error, please try again"));
+  }
 
   return (
     <div className={classes.root}>
@@ -82,6 +110,8 @@ const NewClient = () => {
               label="Client Name"
               name="clientName"
               variant="outlined"
+              error={formError.clientName}
+              helperText={formError.clientName}
               value={formData.clientName}
               onChange={handleChange}
             />
@@ -95,6 +125,8 @@ const NewClient = () => {
                 id="outlined-required"
                 label="Email Address"
                 name="clientEmail"
+                error={formError.clientEmail}
+                helperText={formError.clientEmail}
                 value={formData.clientEmail}
                 variant="outlined"
                 onChange={handleChange}
@@ -109,6 +141,8 @@ const NewClient = () => {
                 label="Work Phone Number"
                 name="clientWorkPhone"
                 variant="outlined"
+                error={formError.clientWorkPhone}
+                helperText={formError.clientWorkPhone}
                 value={formData.clientWorkPhone}
                 onChange={handleChange}
               />
